@@ -15,41 +15,43 @@
 <div class="table-responsive">
 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
  <thead class="text-success">
-   <tr>
-     <th>Name</th>
-     <th>Email</th>
-     <th>Rights</th>
-     <th>Make admin</th>
-   </tr>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Rights</th>
+    <th>Make admin</th>
+  </tr>
  </thead>
-        @foreach($tickets as $t)
-           <tr>
-              <td>{{ $t->name }}</td>
-              <td>{{ $t->email }}</td>
-              @if($t->admin)
-              <td>Admin</td>
-              @else
-              <td>user</td>
-              @endif
-              @if($t->admin)
-              <td><span role="button" onclick="event.preventDefault();document.getElementById('form-incomplete-{{$t->id}}').submit()">&#10003;</span></td>
-              <form style="hidden" method="post" id="{{'form-incomplete-'.$t->id}}"action="{{route('ticket.incomplete',$t->id)}}">
-                @csrf
-                @method('patch')
-              </form>
+ <tbody>
+      @foreach($tickets->sortBy('name') as $t)
+        <tr>
+          <td>{{ $t->name }}</td>
+          <td>{{ $t->email }}</td>
+          @if($t->admin)
+          <td>Admin</td>
+          @else
+          <td>user</td>
+          @endif
+          @if($t->admin)
+          <td><span role="button" onclick="event.preventDefault();document.getElementById('form-incomplete-{{$t->id}}').submit()">&#10003;</span></td>
+          <form style="hidden" method="post" id="{{'form-incomplete-'.$t->id}}"action="{{route('ticket.incomplete',$t->id)}}">
+           @csrf
+           @method('patch')
+          </form>
 
-              @else
+          @else
 
-              <td><span role="button" onclick="event.preventDefault();document.getElementById('form-complete-{{$t->id}}').submit()">&#10007;</span></td>
-              <form style="hidden" method="post" id="{{'form-complete-'.$t->id}}"action="{{route('ticket.complete',$t->id)}}">
-                @csrf
-                @method('patch')
-              </form>
-              @endif
-           </tr>
-           @endforeach
+          <td><span role="button" onclick="event.preventDefault();document.getElementById('form-complete-{{$t->id}}').submit()">&#10007;</span></td>
+          <form style="hidden" method="post" id="{{'form-complete-'.$t->id}}"action="{{route('ticket.complete',$t->id)}}">
+           @csrf
+           @method('patch')
+          </form>
+          @endif
+        </tr>
+        @endforeach
  </tbody>
 </table>
+ <div>{{$tickets->links()}}</div>
 @endif
 </div>
 </div>

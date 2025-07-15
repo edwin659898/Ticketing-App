@@ -30,8 +30,8 @@
         @foreach($tickets as $t)
            <tr>
               <td data-order='desc'>{{ $t->created_at }}</td>
-              <td>{{ $t->owner->name }}</td>
-              <td>{{ $t->owner->site }}</td>
+              <td>{{ $t->owner->name ?? '' }}</td>
+              <td>{{ $t->owner->site ?? '' }}</td>
               <td>{{ $t->subject }}</td>
               <td><a href="{{route('ticket.showadmin',$t->id)}}">View</a></td>
               @if($t->sorted)

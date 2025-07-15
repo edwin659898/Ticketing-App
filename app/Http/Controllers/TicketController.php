@@ -117,10 +117,11 @@ class TicketController extends Controller
   public function users()
   {
     abort_if(!auth()->user()->admin,403);
-    $tickets = User::get();
+    // $tickets = User::get();    
+    $tickets = User::where('status', true)->orderBy('name', 'asc')->paginate(10);
     return view('ticket/users')->with(['tickets' => $tickets]);
   }
-
+  
   public function complete(Request $request, $id)
   {
     $tickets = User::find($id);
