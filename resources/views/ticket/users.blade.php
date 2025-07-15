@@ -58,6 +58,8 @@
 </div>
 <div class="text-center mt-2">
   <span>Page: {{ $tickets->currentPage() }} | Showing {{ $tickets->count() }} users on this page</span>
+  <br>
+  <span>Total Users: {{ $tickets->total() }}</span>
   <div class="mt-2">
     {!! $tickets->links('pagination::bootstrap-4') !!}
   </div>
