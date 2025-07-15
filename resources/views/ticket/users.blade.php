@@ -51,7 +51,18 @@
         @endforeach
  </tbody>
 </table>
- <div>{{$tickets->links()}}</div>
+<div class="d-flex justify-content-center mt-3">
+  <span class="pagination-links">
+    {!! $tickets->links('pagination::simple-bootstrap-4') !!}
+  </span>
+</div>
+<div class="text-center mt-2">
+  {{-- <strong>Total Users: {{ $tickets->total() }}</strong>
+  <br>
+  <span>Pages: {{ $tickets->lastPage() }}</span>
+  <br> --}}
+  <span>Page: {{ $tickets->currentPage() }} | Showing {{ $tickets->count() }} users on this page</span>
+</div>
 @endif
 </div>
 </div>
