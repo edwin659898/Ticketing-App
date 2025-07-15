@@ -57,11 +57,10 @@
   </span>
 </div>
 <div class="text-center mt-2">
-  {{-- <strong>Total Users: {{ $tickets->total() }}</strong>
-  <br>
-  <span>Pages: {{ $tickets->lastPage() }}</span>
-  <br> --}}
   <span>Page: {{ $tickets->currentPage() }} | Showing {{ $tickets->count() }} users on this page</span>
+  <div class="mt-2">
+    {!! $tickets->links('pagination::bootstrap-4') !!}
+  </div>
 </div>
 @endif
 </div>
